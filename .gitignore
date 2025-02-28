@@ -1,1 +1,4 @@
 **/artifacts/
+.ansible-lint
+.yamlfmt
+.yamllint

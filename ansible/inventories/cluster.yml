@@ -1,0 +1,14 @@
+all:
+  children:
+    homelab:
+      children:
+        kubernetes:
+          children:
+            controlplane:
+              hosts:
+                node-1:
+            nodes:
+              hosts:
+                node-2:
+                node-3:
+                node-4:
