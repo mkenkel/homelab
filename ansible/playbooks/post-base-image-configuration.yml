@@ -1,0 +1,14 @@
+---
+- name: Base-image Hardening
+  hosts: kubernetes
+  become: true
+
+  pre_tasks:
+    - name: Grab my vault
+      ansible.builtin.include_vars:
+        file: /home/matt/Repos/ansible-vault/kubernetes.yml
+
+  tasks:
+
+    - name: Change root password
+    - name: Change user password
