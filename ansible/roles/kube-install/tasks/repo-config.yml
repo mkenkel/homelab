@@ -1,0 +1,27 @@
+---
+- name: Run the equivalent of "apt-get update" as a separate step
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install outlined packages
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - python3-debian
+
+- name: Add Kubernetes APT repository
+  ansible.builtin.deb822_repository:
+    name: kubernetes
+    types: [deb]
+    uris: "https://pkgs.k8s.io/core:/stable:/v1.32/deb/"
+    signed_by: "https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key"
+    suites: /
+    state: present
+    enabled: true
+
+- name: Update Apt cache.
+  apt:
+    update_cache: true

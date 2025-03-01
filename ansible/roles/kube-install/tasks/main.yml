@@ -1,0 +1,7 @@
+---
+#SPDX-License-Identifier: MIT-0
+# tasks file for kube-install
+- name: Iterate through steps as files
+  ansible.builtin.include_tasks: '{{ item }}'
+  loop:
+    - repo-config.yml
