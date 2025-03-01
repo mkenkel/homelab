@@ -1,0 +1,22 @@
+---
+- name: Kubernetes Install
+  hosts: kubernetes
+  gather_facts: true
+  become: true
+
+  collections:
+    - ansible.posix
+    - community.crypto
+    - community.general
+
+  pre_tasks:
+    - name: Grab my vault
+      ansible.builtin.include_vars:
+        file: /home/matt/Repos/ansible-vault/kubernetes.yml
+
+  tasks:
+    - name: Role call - Kubernetes Install
+      ansible.builtin.include_role:
+        name: '{{ item }}'
+      loop:
+        - 'kube-install'

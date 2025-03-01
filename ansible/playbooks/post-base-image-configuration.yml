@@ -11,4 +11,11 @@
   tasks:
 
     - name: Change root password
+      ansible.builtin.user:
+        name: root
+        password: "{{ root_passwd | password_hash('sha512')}}"
+
     - name: Change user password
+      ansible.builtin.user:
+        name: ftl
+        password: "{{ ftl_passwd | password_hash('sha512')}}"
