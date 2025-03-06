@@ -1,0 +1,53 @@
+---
+# Steps in here can take place across all nodes
+- name: Enable IPv4 Packet Forwarding
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: true
+    sysctl_file: /etc/sysctl.d/k8s.conf
+    reload: true
+
+- name: Prep update
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Add Docker APT repository
+  ansible.builtin.deb822_repository:
+    name: Docker - containerd
+    types: [deb]
+    uris: "https://download.docker.com/linux/debian/"
+    signed_by: "https://download.docker.com/linux/debian/gpg"
+    suites: "{{ ansible_distribution_release }}"
+    components: stable
+    architectures: amd64
+    state: present
+    enabled: true
+
+- name: Update Apt cache.
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Now install containerd/cni-plugins
+  ansible.builtin.apt:
+    pkg:
+      - containerd.io
+
+- name: Hold the installed packages
+  ansible.builtin.dpkg_selections:
+    name: '{{ item }}'
+    selection: hold
+  loop:
+    - containerd.io
+
+- name: Drop in the configuration file
+  ansible.builtin.template:
+    src: '../templates/config.j2'
+    dest: '/etc/containerd/config.toml'
+
+- name: Ensure the containerd service is enabled and restarted
+  ansible.builtin.systemd:
+    name: containerd
+    state: restarted
+    enabled: true
+    daemon_reload: true
