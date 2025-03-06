@@ -19,4 +19,4 @@
       ansible.builtin.include_role:
         name: '{{ item }}'
       loop:
-        - 'kube-install'
+        - 'master-install'
