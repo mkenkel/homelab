@@ -33,9 +33,3 @@
     - kubelet
     - kubeadm
     - kubectl
-
-- name: Add swap and cgroup flags to kubelet
-  ansible.builtin.lineinfile:
-    path: /etc/default/kubelet
-    regexp: '^KUBELET_EXTRA_ARGS='
-    line: 'KUBELET_EXTRA_ARGS="--cgroup-driver=systemd --fail-swap-on=false"'

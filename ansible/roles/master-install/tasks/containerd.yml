@@ -40,10 +40,15 @@
   loop:
     - containerd.io
 
-- name: Drop in the configuration file
+- name: Drop in the configuration file for containerd
   ansible.builtin.template:
-    src: '../templates/config.j2'
+    src: '../templates/containerd_config.j2'
     dest: '/etc/containerd/config.toml'
+
+- name: Drop in the configuration file for crictl
+  ansible.builtin.template:
+    src: '../templates/crictl.yaml'
+    dest: '/etc/crictl.yaml'
 
 - name: Ensure the containerd service is enabled and restarted
   ansible.builtin.systemd:
