@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumEgressGatewayPolicy
+metadata:
+  name: standard-egress
+selectors:
+  - podSelector:
+      matchLabels:
+        app: factorio
+        io.kubernetes.pod.namespace: default
+destinationCIDRs:
+  - '0.0.0.0/0'
+egressGateway:
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: node-3
