@@ -5,6 +5,9 @@ cluster:
   id: 1
 bpf:
   masquerade: true
+ipam:
+  mode: kubernetes
+  multiPoolPreAllocation: ""
 egressGateway:
   enabled: true
 hubble:
@@ -13,6 +16,10 @@ hubble:
     enabled: true
   ui:
     enabled: true
+# Ingress Controller
+ingressController:
+  enabled: true
+  loadbalancerMode: dedicated
 # L2 Announcement Rate Limiting
 k8sClientRateLimit:
   burst: 10
