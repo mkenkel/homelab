@@ -1,0 +1,95 @@
+# radarr-test.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: radarr
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: radarr-pv
+  labels:
+    app: radarr
+  namespace: radarr
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: /mnt/data/radarr
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-pvc
+  labels:
+    app: radarr
+  namespace: radarr
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  namespace: radarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+        - image: linuxserver/radarr
+          imagePullPolicy: Always
+          name: radarr
+          volumeMounts:
+            - mountPath: /radarr
+              name: radarr-data
+      volumes:
+        - name: radarr-data
+          persistentVolumeClaim:
+            claimName: radarr-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+  namespace: radarr
+spec:
+  type: LoadBalancer
+  ports:
+    - name: web-interface
+      port: 7878
+  selector:
+    app: radarr
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: radarr
+  namespace: radarr
+spec:
+  rules:
+    - host: radarr.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: radarr
+                port:
+                  number: 7878
