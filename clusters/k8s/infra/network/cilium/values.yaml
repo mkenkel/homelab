@@ -1,0 +1,28 @@
+# Found here - https://raw.githubusercontent.com/cilium/cilium/refs/heads/main/install/kubernetes/cilium/values.yaml
+# User configured values are all to be listed below.
+cluster:
+  id: 1
+  name: abode
+externalIPs:
+  enabled: true
+  hostNetwork:
+    enabled: true
+gatewayAPI:
+  enabled: true
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+k8sClientRateLimit:
+  burst: 200
+  qps: 50
+k8sServiceHost: 192.168.15.5
+k8sServicePort: 6443
+kubeProxyReplacement: true
+l2announcements:
+  enabled: true
+operator:
+  rollOutPods: true
+rollOutCiliumPods: true
