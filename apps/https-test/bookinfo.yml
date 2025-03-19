@@ -69,6 +69,7 @@ spec:
       version: v1
   template:
     metadata:
+      namespace: default
       labels:
         app: details
         version: v1
@@ -124,6 +125,7 @@ spec:
       version: v1
   template:
     metadata:
+      namespace: default
       labels:
         app: ratings
         version: v1
@@ -179,6 +181,7 @@ spec:
       version: v1
   template:
     metadata:
+      namespace: default
       labels:
         app: reviews
         version: v1
@@ -222,6 +225,7 @@ spec:
       version: v2
   template:
     metadata:
+      namespace: default
       labels:
         app: reviews
         version: v2
@@ -265,6 +269,7 @@ spec:
       version: v3
   template:
     metadata:
+      namespace: default
       labels:
         app: reviews
         version: v3
