@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
@@ -10,14 +11,14 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infra/networking/cilium/base
+  path: ./infra/networking/cilium
   prune: true
   wait: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cilium-features
+  name: cilium-resources
   namespace: flux-system
 spec:
   dependsOn:
@@ -28,6 +29,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infra/networking/cilium/features
+  path: ./infra/networking/cilium/resources
   prune: true
   wait: true
