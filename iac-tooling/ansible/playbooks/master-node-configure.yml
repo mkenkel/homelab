@@ -1,0 +1,32 @@
+---
+- name: Initial Node Configurations
+  hosts: kubernetes
+  gather_facts: true
+  become: true
+
+  collections:
+    - ansible.posix
+    - community.crypto
+    - community.general
+
+  pre_tasks:
+    - name: Grab my vault
+      ansible.builtin.include_vars:
+        file: /home/matt/Repos/ansible-vault/kubernetes.yml
+
+    - name: Change root password
+      ansible.builtin.user:
+        name: root
+        password: "{{ root_passwd | password_hash('sha512')}}"
+
+    - name: Change user password
+      ansible.builtin.user:
+        name: ftl
+        password: "{{ ftl_passwd | password_hash('sha512')}}"
+
+  tasks:
+    - name: Role call - Kubernetes Install
+      ansible.builtin.include_role:
+        name: '{{ item }}'
+      loop:
+        - 'master-install'
