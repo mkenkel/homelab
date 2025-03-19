@@ -34,7 +34,7 @@ spec:
       loadbalancerMode: shared
       service:
         annotations:
-          io.cilium/lb-ipam-ips: 192.168.15.31
+          io.cilium/lb-ipam-ips: 192.168.15.100
     k8sClientRateLimit:
       burst: 200
       qps: 50
