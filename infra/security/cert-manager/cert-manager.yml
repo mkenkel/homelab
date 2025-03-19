@@ -33,4 +33,3 @@ spec:
       interval: 12h
   values:
     installCRDs: true
-    enableGatewayAPI: true
