@@ -14,6 +14,8 @@ spec:
         kind: HelmRepository
         name: cilium
       interval: 12h
+  upgrade:
+    force: true
   values:
     cluster:
       id: 1
