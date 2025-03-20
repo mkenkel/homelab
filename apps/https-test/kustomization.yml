@@ -5,4 +5,3 @@ resources:
   - bookinfo.yml
   - basic-https.yml
   - ca-issuer.yml
-  - http-gateway.yml
