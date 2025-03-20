@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - bookinfo.yml
   - basic-http.yml
+  - ca-issuer.yml
