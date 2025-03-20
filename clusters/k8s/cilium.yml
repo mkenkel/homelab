@@ -29,5 +29,5 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./infra/networking/cilium/resources
-  prune: false
+  prune: true
   wait: true
