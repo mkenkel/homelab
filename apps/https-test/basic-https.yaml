@@ -3,7 +3,7 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   namespace: default
-  name: tls-gateway
+  name: my-gateway
 spec:
   gatewayClassName: cilium
   listeners:
@@ -31,7 +31,7 @@ metadata:
   name: https-app-route-1
 spec:
   parentRefs:
-    - name: tls-gateway
+    - name: my-gateway
   hostnames:
     - "bookinfo.cilium.rocks"
   rules:
@@ -50,7 +50,7 @@ metadata:
   name: https-app-route-2
 spec:
   parentRefs:
-    - name: tls-gateway
+    - name: my-gateway
   hostnames:
     - "hipstershop.cilium.rocks"
   rules:
