@@ -32,6 +32,8 @@ spec:
           envoy:
             # Add NET_BIND_SERVICE to the list (keep the others!)
             - NET_BIND_SERVICE
+            - NET_ADMIN
+            - BPF
     hubble:
       enabled: true
       relay:
