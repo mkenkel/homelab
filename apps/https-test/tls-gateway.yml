@@ -2,7 +2,6 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  namespace: default
   name: tls-gateway
 spec:
   gatewayClassName: cilium
@@ -27,7 +26,6 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  namespace: default
   name: https-app-route-1
 spec:
   parentRefs:
@@ -46,7 +44,6 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  namespace: default
   name: https-app-route-2
 spec:
   parentRefs:
