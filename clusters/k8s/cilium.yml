@@ -12,8 +12,7 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./infra/networking/cilium
-  prune: false
-  wait: true
+  prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
