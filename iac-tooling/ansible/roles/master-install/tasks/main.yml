@@ -7,3 +7,4 @@
     - pre-tasks.yml
     - containerd.yml
     - kube.yml
+    - storage.yml

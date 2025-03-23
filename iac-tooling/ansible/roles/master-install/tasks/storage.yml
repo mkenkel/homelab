@@ -1,0 +1,34 @@
+---
+- name: Install storage pre-requisites
+  ansible.builtin.apt:
+    pkg:
+      - btop # Cool kids top
+      - cifs-utils
+      - glances # Top alternative?
+      - iotop
+      - libnfs-utils
+      - lsscsi
+      - multipath-tools
+      - nvme-cli # Can do prometheus exports of SMART nvme data!
+      - open-iscsi
+      - scsitools
+      - sg3-utils
+      - sysstat # aka iostat
+
+- name: mpathconf enable with multipathd
+  ansible.builtin.template:
+    src: '../templates/multipath.conf'
+    dest: '/etc/multipath.conf'
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Ensure multipath and iscsi service is running
+  ansible.builtin.systemd:
+    name: '{{ item }}'
+    state: restarted
+    enabled: true
+    daemon_reload: true
+  loop:
+    - multipath-tools
+    - open-iscsi
