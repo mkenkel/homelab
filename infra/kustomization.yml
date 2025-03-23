@@ -7,3 +7,4 @@ resources:
   - cilium/resources/
   - cert-manager/
   - cf-operator/
+  - longhorn/
